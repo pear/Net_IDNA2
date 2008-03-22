@@ -1,5 +1,6 @@
 <?php
 /* ------------------------------------------------------------------------- */
+/* based on:                                                                 */
 /* idna_convert.class.php - Encode / Decode Internationalized Domain Names   */
 /* (c) 2004-2005 phlyLabs, Berlin (http://phlylabs.de)                       */
 /* All rights reserved                                                       */
@@ -53,9 +54,11 @@
  *
  * ACE input and output is always expected to be ASCII.
  *
+ * @author  Markus Nix <mnix@docuverse.de>
  * @author  Matthias Sommerfeld <mso@phlylabs.de>
- * @version 0.4.0
- *
+ * @author  Stefan Neufeind <pear.neufeind@speedpartner.de>
+ * @package Net
+ * @version $Id$
  */
 
 class Net_IDNA_php4
@@ -2959,11 +2962,11 @@ class Net_IDNA_php4
 }
 
 /**
-* Adapter class for aligning the API of idna_convert with that of
+* Adapter class for aligning the API of Net_IDNA_php4 with that of
 * Net_IDNA
 * @author  Matthias Sommerfeld <mso@phlylabs.de>
 */
-class Net_IDNA extends idna_convert
+class Net_IDNA extends Net_IDNA_php4
 {
     /**
     * Constructor

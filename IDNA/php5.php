@@ -50,6 +50,7 @@
  *
  * @author  Markus Nix <mnix@docuverse.de>
  * @author  Matthias Sommerfeld <mso@phlylabs.de>
+ * @author  Stefan Neufeind <pear.neufeind@speedpartner.de>
  * @package Net
  * @version $Id$
  */
