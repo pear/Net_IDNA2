@@ -2430,7 +2430,11 @@ class Net_IDNA_php4
                 $codecount++;
             }
         }
-        if ($codecount == $deco_len) return $encoded; // All codepoints were basic ones
+
+        // All codepoints were basic ones
+        if ($codecount == $deco_len) {
+            return $encoded;
+        }
 
         // Start with the prefix; copy it to output
         $encoded = $this->_punycode_prefix.$encoded;
