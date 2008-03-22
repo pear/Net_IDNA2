@@ -1,69 +1,142 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<package version="1.0">
-  <name>Net_IDNA</name>
-  <summary>Punycode encoding and decoding.</summary>
-  <description>This package helps you to encode and decode punycode strings easily.</description>
-  <maintainers>
-    <maintainer>
-      <user>mnx</user>
-      <name>Markus Nix</name>
-      <email>mnix@docuverse.de</email>
-      <role>lead</role>
-    </maintainer>
-    <maintainer>
-      <user>mso</user>
-      <name>Matthias Sommerfeld</name>
-      <email>mso@phlylabs.de</email>
-      <role>lead</role>
-    </maintainer>
-  </maintainers>
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.7.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Net_IDNA</name>
+ <channel>pear.php.net</channel>
+ <summary>Punycode encoding and decoding.</summary>
+ <description>This package helps you to encode and decode punycode strings easily.
+ </description>
+ <lead>
+  <name>Stefan Neufeind</name>
+  <user>neufeind</user>
+  <email>pear.neufeind@speedpartner.de</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Markus Nix</name>
+  <user>mnx</user>
+  <email>mnix@docuverse.de</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Matthias Sommerfeld</name>
+  <user>mso</user>
+  <email>mso@phlylabs.de</email>
+  <active>yes</active>
+ </lead>
+ <date>2008-03-22</date>
+ <time>16:34:02</time>
+ <version>
+  <release>0.7.2</release>
+  <api>0.7.1</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+ <notes>#8098 Cannot inherit from undefined class idna_convert
+#11644 Wrong line in IDNA/php4.php
+#10784 Net_IDNA::singleton() calls non-existant factory() method
+#10783 Net_IDNA::getInstance() reference notice
+#8387 Problem with encode Polish letters
+Converted to package.xml version 2.0
+ </notes>
+ <contents>
+  <dir name="/">
+   <dir name="IDNA">
+    <file baseinstalldir="Net" md5sum="fbec9a4461dfd76c10b4e5dc2be27961" name="php4.php" role="php" />
+    <file baseinstalldir="Net" md5sum="f4d03aac2e55c7ba6b625ad728505934" name="php5.php" role="php" />
+   </dir> <!-- /IDNA -->
+   <dir name="test">
+    <file baseinstalldir="Net" md5sum="4531a384843d33902921cbb4a2a6df45" name="test_php4.php" role="test" />
+    <file baseinstalldir="Net" md5sum="9ccee505f9ac173b5a31a1cfb5ef2a35" name="test_php5.php" role="test" />
+   </dir> <!-- /test -->
+   <file baseinstalldir="Net" md5sum="67129143b00f615b90efd8266f48ae1a" name="IDNA.php" role="php" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.3.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
   <release>
-    <version>0.7.1</version>
-    <date>2005-08-13</date>
-    <license>LGPL</license>
-    <state>beta</state>
-    <notes>Fixed error handling (&quot;Beloved Benjamin Muskalla version&quot;)</notes>
-    <deps>
-      <dep type="php" rel="ge" version="4.3.0" optional="no"/>
-      <dep type="php" rel="ge" version="5.0.0RC1" optional="yes"/>
-    </deps>
-    <filelist>
-      <file role="php" baseinstalldir="Net" md5sum="67129143b00f615b90efd8266f48ae1a" name="IDNA.php"/>
-      <file role="php" baseinstalldir="Net" md5sum="fbec9a4461dfd76c10b4e5dc2be27961" name="IDNA/php4.php"/>
-      <file role="php" baseinstalldir="Net" md5sum="f4d03aac2e55c7ba6b625ad728505934" name="IDNA/php5.php"/>
-      <file role="test" baseinstalldir="Net" md5sum="4531a384843d33902921cbb4a2a6df45" name="test/test_php4.php"/>
-      <file role="test" baseinstalldir="Net" md5sum="9ccee505f9ac173b5a31a1cfb5ef2a35" name="test/test_php5.php"/>
-    </filelist>
+   <version>
+    <release>0.7.1</release>
+    <api>0.7.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>Fixed error handling (&quot;Beloved Benjamin Muskalla version&quot;)
+   </notes>
   </release>
-  <changelog>
-    <release>
-      <version>0.6.0</version>
-      <date>2005-08-03</date>
-      <state>beta</state>
-      <notes>Several fixes, fixed problems with unicode codepoints.
-</notes>
-    </release>
-    <release>
-      <version>0.5.0</version>
-      <date>2005-02-01</date>
-      <state>beta</state>
-      <notes>Fixed bug #2801: Changed dependency settings (Package now works fine with PHP4 and 5).
-</notes>
-    </release>
-    <release>
-      <version>0.4.0</version>
-      <date>2004-11-14</date>
-      <state>beta</state>
-      <notes>Fixed bug #2717: The German sharp S (ß) is converted incorrect. It isn't treated as a special character but simply replaced by &quot;ss&quot;.
-</notes>
-    </release>
-    <release>
-      <version>0.3.0</version>
-      <date>2004-08-16</date>
-      <state>beta</state>
-      <notes>Initial release.
-</notes>
-    </release>
-  </changelog>
+  <release>
+   <version>
+    <release>0.6.0</release>
+    <api>0.6.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2005-08-03</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>Several fixes, fixed problems with unicode codepoints.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.0</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2005-02-01</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>Fixed bug #2801: Changed dependency settings (Package now works fine with PHP4 and 5).
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.4.0</release>
+    <api>0.4.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2004-11-14</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>Fixed bug #2717: The German sharp S (Ã) is converted incorrect. It isn&apos;t treated as a special character but simply replaced by &quot;ss&quot;.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2004-08-16</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>Initial release.
+   </notes>
+  </release>
+ </changelog>
 </package>
