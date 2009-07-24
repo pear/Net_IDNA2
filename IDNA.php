@@ -46,7 +46,7 @@ class Net_IDNA
      *                          false on an error.
      * @access public
      */
-    function &getInstance($params = array())
+    function getInstance($params = array())
     {
         $version   = explode( '.', phpversion() );
         $handler   = ((int)$version[0] > 4) ? 'php5' : 'php4';
@@ -80,7 +80,7 @@ class Net_IDNA
      *                          false on an error.
      * @access public
      */
-    function &singleton($params = array())
+    function singleton($params = array())
     {
         static $instances;
         if (!isset($instances)) {
@@ -89,7 +89,7 @@ class Net_IDNA
 
         $signature = serialize($params);
         if (!isset($instances[$signature])) {
-            $instances[$signature] = &Net_IDNA::getInstance($params);
+            $instances[$signature] = Net_IDNA::getInstance($params);
         }
 
         return $instances[$signature];
