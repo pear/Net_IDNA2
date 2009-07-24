@@ -8,22 +8,22 @@
   <name>Stefan Neufeind</name>
   <user>neufeind</user>
   <email>pear.neufeind@speedpartner.de</email>
-  <active>yes</active>
+  <active>no</active>
  </lead>
  <lead>
   <name>Markus Nix</name>
   <user>mnx</user>
   <email>mnix@docuverse.de</email>
-  <active>yes</active>
+  <active>no</active>
  </lead>
  <lead>
   <name>Matthias Sommerfeld</name>
   <user>mso</user>
   <email>mso@phlylabs.de</email>
-  <active>yes</active>
+  <active>no</active>
  </lead>
  <date>2009-07-24</date>
- <time>13:54:00</time>
+ <time>14:01:55</time>
  <version>
   <release>0.7.3</release>
   <api>0.7.1</api>
@@ -34,6 +34,7 @@
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
+Bug #16463 - mbstring.func_overload support
 #8098 Cannot inherit from undefined class idna_convert
 #11644 Wrong line in IDNA/php4.php
 #10784 Net_IDNA::singleton() calls non-existant factory() method
@@ -45,12 +46,12 @@ PHP 5.3 errors fixed (Bug #15892)
 QA Release
  </notes>
  <contents>
-  <dir baseinstalldir="Net" name="/">
-   <file baseinstalldir="Net" md5sum="f7a1a71975670d568b6a764ff54175ed" name="Net/IDNA.php" role="php" />
-   <file baseinstalldir="Net" md5sum="79b6a7304bef9b149daee532a5c85314" name="Net/IDNA/php4.php" role="php" />
-   <file baseinstalldir="Net" md5sum="366b02e047b424dde41c4da87ccf1c40" name="Net/IDNA/php5.php" role="php" />
-   <file baseinstalldir="Net" md5sum="4531a384843d33902921cbb4a2a6df45" name="test/test_php4.php" role="test" />
-   <file baseinstalldir="Net" md5sum="9ccee505f9ac173b5a31a1cfb5ef2a35" name="test/test_php5.php" role="test" />
+  <dir baseinstalldir="/" name="/">
+   <file md5sum="971e60b11b4f91a50164132aadd7c420" name="Net/IDNA.php" role="php" />
+   <file md5sum="ad4adad9b0e2d72b7d83804f69d2b81f" name="Net/IDNA/php4.php" role="php" />
+   <file md5sum="ea65c56da1abcd7f66bca8e0f681009c" name="Net/IDNA/php5.php" role="php" />
+   <file md5sum="4531a384843d33902921cbb4a2a6df45" name="test/test_php4.php" role="test" />
+   <file md5sum="9ccee505f9ac173b5a31a1cfb5ef2a35" name="test/test_php5.php" role="test" />
   </dir>
  </contents>
  <dependencies>
@@ -174,6 +175,7 @@ QA Release
    <date>2009-07-24</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
+Bug #16463 - mbstring.func_overload support
 #8098 Cannot inherit from undefined class idna_convert
 #11644 Wrong line in IDNA/php4.php
 #10784 Net_IDNA::singleton() calls non-existant factory() method
