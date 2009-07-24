@@ -2192,6 +2192,17 @@ class Net_IDNA_php5
      * @access private
      */
     private $_strict_mode = false;
+
+    /**
+     * Cached value indicating whether or not mbstring function overloading is
+     * on for strlen
+     *
+     * This is cached for optimal performance.
+     *
+     * @var boolean
+     * @see Net_IDNA_php5::_byteLength()
+     */
+    private static $_mb_string_overload = null;
     // }}}
 
 
@@ -2209,6 +2220,12 @@ class Net_IDNA_php5
 
         if (is_array($options)) {
             $this->setParams($options);
+        }
+
+        // populate mbstring overloading cache if not set
+        if (self::$_mb_string_overload === null) {
+            self::$_mb_string_overload = (extension_loaded('mbstring')
+                && (ini_get('mbstring.func_overload') & 0x02) === 0x02);
         }
     }
     // }}}
@@ -2455,7 +2472,7 @@ class Net_IDNA_php5
     private function _encode($decoded)
     {
         // We cannot encode a domain name containing the Punycode prefix
-        $extract = strlen($this->_punycode_prefix);
+        $extract = self::_byteLength($this->_punycode_prefix);
         $check_pref = $this->_utf8_to_ucs4($this->_punycode_prefix);
         $check_deco = array_slice($decoded, 0, $extract);
 
@@ -2601,8 +2618,8 @@ class Net_IDNA_php5
         // Find last occurence of the delimiter
         $delim_pos = strrpos($encoded, '-');
 
-        if ($delim_pos > strlen($this->_punycode_prefix)) {
-            for ($k = strlen($this->_punycode_prefix); $k < $delim_pos; ++$k) {
+        if ($delim_pos > self::_byteLength($this->_punycode_prefix)) {
+            for ($k = self::_byteLength($this->_punycode_prefix); $k < $delim_pos; ++$k) {
                 $decoded[] = ord($encoded{$k});
             }
         } else {
@@ -2610,7 +2627,7 @@ class Net_IDNA_php5
         }
 
         $deco_len = count($decoded);
-        $enco_len = strlen($encoded);
+        $enco_len = self::_byteLength($encoded);
 
         // Wandering through the strings; init
         $is_first = true;
@@ -3010,7 +3027,7 @@ class Net_IDNA_php5
     {
         $output = array();
         $out_len = 0;
-        $inp_len = strlen($input);
+        $inp_len = self::_byteLength($input, '8bit');
         $mode = 'next';
         $test = 'none';
         for ($k = 0; $k < $inp_len; ++$k) {
@@ -3159,7 +3176,7 @@ class Net_IDNA_php5
     {
         $output = array();
 
-        $inp_len = strlen($input);
+        $inp_len = self::_byteLength($input);
         // Input length must be dividable by 4
         if ($inp_len % 4) {
             throw new Exception('Input UCS4 string is broken');
@@ -3227,6 +3244,25 @@ class Net_IDNA_php5
 
         return $return;
     }
+
+    /**
+     * Gets the length of a string in bytes even if mbstring function
+     * overloading is turned on
+     *
+     * @param string $string the string for which to get the length.
+     *
+     * @return integer the length of the string in bytes.
+     *
+     * @see Net_IDNA_php5::$_mb_string_overload
+     */
+    private static function _byteLength($string)
+    {
+        if (self::$_mb_string_overload) {
+            return mb_strlen($string, '8bit');
+        }
+        return strlen((binary)$string);
+    }
+
     // }}}}
 }
 
