@@ -89,7 +89,7 @@ class Net_IDNA
 
         $signature = serialize($params);
         if (!isset($instances[$signature])) {
-            $instances[$signature] = &Net_IDNA::factory($params);
+            $instances[$signature] = &Net_IDNA::getInstance($params);
         }
 
         return $instances[$signature];
