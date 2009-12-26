@@ -1,35 +1,31 @@
 <?php
-/* ------------------------------------------------------------------------- */
-/* based on:                                                                 */
-/* idna_convert.class.php - Encode / Decode Internationalized Domain Names   */
-/* (c) 2004-2005 phlyLabs, Berlin (http://phlylabs.de)                       */
-/* All rights reserved                                                       */
-/* v0.4.0                                                                    */
-/* ------------------------------------------------------------------------- */
-
-// {{{ license
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 foldmethod=marker: */
-//
-// +----------------------------------------------------------------------+
-// | This library is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU Lesser General Public License as       |
-// | published by the Free Software Foundation; either version 2.1 of the |
-// | License, or (at your option) any later version.                      |
-// |                                                                      |
-// | This library is distributed in the hope that it will be useful, but  |
-// | WITHOUT ANY WARRANTY; without even the implied warranty of           |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU    |
-// | Lesser General Public License for more details.                      |
-// |                                                                      |
-// | You should have received a copy of the GNU Lesser General Public     |
-// | License along with this library; if not, write to the Free Software  |
-// | Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 |
-// | USA.                                                                 |
-// +----------------------------------------------------------------------+
-//
 
-// }}}
+/**
+ * based on:
+ * idna_convert.class.php - Encode / Decode Internationalized Domain Names
+ * (c) 2004-2005 phlyLabs, Berlin (http://phlylabs.de)
+ * All rights reserved
+ * v0.4.0
+ */
+
+/**
+ * This library is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of the
+ * License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA.
+ */
 
 /**
  * Encode/decode Internationalized Domain Names.
@@ -60,7 +56,6 @@
  * @package Net
  * @version $Id$
  */
-
 class Net_IDNA_php4
 {
     // {{{ npdata
@@ -1123,8 +1118,8 @@ class Net_IDNA_php4
         0x33BE  => array(0x6B, 0x77),
         0x33BF  => array(0x6D, 0x77),
         0x33C0  => array(0x6B, 0x3C9),
-        0x33C1  => array(0x6D, 0x3C9), /*
-        0x33C2  => array(0x61, 0x2E, 0x6D, 0x2E), */
+        0x33C1  => array(0x6D, 0x3C9),
+        /* 0x33C2  => array(0x61, 0x2E, 0x6D, 0x2E), */
         0x33C3  => array(0x62, 0x71),
         0x33C6  => array(0x63, 0x2215, 0x6B, 0x67),
         0x33C7  => array(0x63, 0x6F, 0x2E),
@@ -2076,7 +2071,9 @@ class Net_IDNA_php4
     var $_allow_overlong =  false;  // Overlong UTF-8 encodings are forbidden
     var $_strict_mode    =  false;  // Behave strict or not
 
-    // The constructor
+    /*
+    * The constructor
+    */
     function Net_IDNA_php4($options = false)
     {
         $this->slast = $this->_sbase + $this->_lcount * $this->_vcount * $this->_tcount;
@@ -2098,10 +2095,11 @@ class Net_IDNA_php4
     *           on failures; false: loose mode, ideal for "wildlife" applications
     *           by silently ignoring errors and returning the original input instead
     *
-    * @param    mixed     Parameter to set (string: single parameter; array of Parameter => Value pairs)
-    * @param    string    Value to use (if parameter 1 is a string)
-    * @return   boolean   true on success, false otherwise
-    * @access   public
+    * @param mixed  $option Parameter to set (string: single parameter; array of Parameter => Value pairs)
+    * @param string $value  Value to use (if parameter 1 is a string)
+    *
+    * @return boolean true on success, false otherwise
+    * @access public
     */
     function set_parameter($option, $value = false)
     {
@@ -2138,10 +2136,12 @@ class Net_IDNA_php4
 
     /**
     * Decode a given ACE domain name
-    * @param    string   Domain name (ACE string)
-    * [@param    string   Desired output encoding, see {@link set_parameter}]
-    * @return   string   Decoded Domain name (UTF-8 or UCS-4)
-    * @access   public
+    *
+    * @param string $input             Domain name (ACE string)
+    * @param string $one_time_encoding Desired output encoding, see {@link set_parameter}
+    *
+    * @return string Decoded Domain name (UTF-8 or UCS-4)
+    * @access public
     */
     function decode($input, $one_time_encoding = false)
     {
@@ -2211,8 +2211,8 @@ class Net_IDNA_php4
             return $return;
             break;
         case 'ucs4_string':
-           return $this->_ucs4_to_ucs4_string($this->_utf8_to_ucs4($return));
-           break;
+            return $this->_ucs4_to_ucs4_string($this->_utf8_to_ucs4($return));
+            break;
         case 'ucs4_array':
             return $this->_utf8_to_ucs4($return);
             break;
@@ -2224,10 +2224,12 @@ class Net_IDNA_php4
 
     /**
     * Encode a given UTF-8 domain name
-    * @param    string   Domain name (UTF-8 or UCS-4)
-    * [@param    string   Desired input encoding, see {@link set_parameter}]
-    * @return   string   Encoded Domain name (ACE string)
-    * @access   public
+    *
+    * @param string $decoded           Domain name (UTF-8 or UCS-4)
+    * @param string $one_time_encoding Desired input encoding, see {@link set_parameter}
+    *
+    * @return string Encoded Domain name (ACE string)
+    * @access public
     */
     function encode($decoded, $one_time_encoding = false)
     {
@@ -2238,9 +2240,10 @@ class Net_IDNA_php4
             $decoded = $this->_utf8_to_ucs4($decoded);
             break;
         case 'ucs4_string':
-           $decoded = $this->_ucs4_string_to_ucs4($decoded);
+            $decoded = $this->_ucs4_string_to_ucs4($decoded);
+            break;
         case 'ucs4_array':
-           break;
+            break;
         default:
             // $this->_error('Unsupported input format: '.$this->_api_encoding);
             $this->_error('Unsupported input format');
@@ -2272,8 +2275,8 @@ class Net_IDNA_php4
             case 0x40:
                 // Neither email addresses nor URLs allowed in strict mode
                 if ($this->_strict_mode) {
-                   $this->_error('Neither email addresses nor URLs are allowed in strict mode.');
-                   return false;
+                    $this->_error('Neither email addresses nor URLs are allowed in strict mode.');
+                    return false;
                 } else {
                     // Skip first char
                     if ($k) {
@@ -2312,9 +2315,9 @@ class Net_IDNA_php4
 
     /**
     * Use this method to get the last error ocurred
-    * @param    void
-    * @return   string   The last error, that occured
-    * @access   public
+    *
+    * @return string The last error, that occured
+    * @access public
     */
     function get_last_error()
     {
@@ -2323,7 +2326,8 @@ class Net_IDNA_php4
 
     /**
     * The actual decoding algorithm
-    * @access   private
+    *
+    * @access private
     */
     function _decode($encoded)
     {
@@ -2382,7 +2386,8 @@ class Net_IDNA_php4
 
     /**
     * The actual encoding algorithm
-    * @access   private
+    *
+    * @access private
     */
     function _encode($decoded)
     {
@@ -2423,9 +2428,10 @@ class Net_IDNA_php4
             $test = $decoded[$i];
             // Will match [0-9a-zA-Z-]
             if ((0x2F < $test && $test < 0x40)
-                    || (0x40 < $test && $test < 0x5B)
-                    || (0x60 < $test && $test <= 0x7B)
-                    || (0x2D == $test)) {
+                || (0x40 < $test && $test < 0x5B)
+                || (0x60 < $test && $test <= 0x7B)
+                || (0x2D == $test)
+            ) {
                 $encoded .= chr($decoded[$i]);
                 $codecount++;
             }
@@ -2486,7 +2492,8 @@ class Net_IDNA_php4
 
     /**
     * Adapt the bias according to the current code point and position
-    * @access   private
+    *
+    * @access private
     */
     function _adapt($delta, $npoints, $is_first)
     {
@@ -2500,6 +2507,7 @@ class Net_IDNA_php4
 
     /**
     * Encoding a certain digit
+    *
     * @access   private
     */
     function _encode_digit($d)
@@ -2509,6 +2517,7 @@ class Net_IDNA_php4
 
     /**
     * Decode a certain digit
+    *
     * @access   private
     */
     function _decode_digit($cp)
@@ -2519,6 +2528,7 @@ class Net_IDNA_php4
 
     /**
     * Internal error handling method
+    *
     * @access   private
     */
     function _error($error = '')
@@ -2528,9 +2538,11 @@ class Net_IDNA_php4
 
     /**
     * Do Nameprep according to RFC3491 and RFC3454
-    * @param    array    Unicode Characters
-    * @return   string   Unicode Characters, Nameprep'd
-    * @access   private
+    *
+    * @param array $input Unicode Characters
+    *
+    * @return string Unicode Characters, Nameprep'd
+    * @access private
     */
     function _nameprep($input)
     {
@@ -2564,7 +2576,7 @@ class Net_IDNA_php4
                 foreach ($this->_hangul_decompose($v) as $out) {
                     $output[] = $out;
                 }
-            // There's a decomposition mapping for that code point
+                // There's a decomposition mapping for that code point
             } elseif (isset($this->_np_replacemaps[$v])) {
                 foreach ($this->_apply_cannonical_ordering($this->_np_replacemaps[$v]) as $out) {
                     $output[] = $out;
@@ -2613,9 +2625,11 @@ class Net_IDNA_php4
     /**
     * Decomposes a Hangul syllable
     * (see http://www.unicode.org/unicode/reports/tr15/#Hangul
-    * @param    integer  32bit UCS4 code point
-    * @return   array    Either Hangul Syllable decomposed or original 32bit value as one value array
-    * @access   private
+    *
+    * @param integer $char 32bit UCS4 code point
+    *
+    * @return array Either Hangul Syllable decomposed or original 32bit value as one value array
+    * @access private
     */
     function _hangul_decompose($char)
     {
@@ -2634,9 +2648,11 @@ class Net_IDNA_php4
     /**
     * Ccomposes a Hangul syllable
     * (see http://www.unicode.org/unicode/reports/tr15/#Hangul
-    * @param    array    Decomposed UCS4 sequence
-    * @return   array    UCS4 sequence with syllables composed
-    * @access   private
+    *
+    * @param array $input Decomposed UCS4 sequence
+    *
+    * @return array UCS4 sequence with syllables composed
+    * @access private
     */
     function _hangul_compose($input)
     {
@@ -2683,9 +2699,11 @@ class Net_IDNA_php4
 
     /**
     * Returns the combining class of a certain wide char
-    * @param    integer    Wide char to check (32bit integer)
-    * @return   integer    Combining class if found, else 0
-    * @access   private
+    *
+    * @param integer $char Wide char to check (32bit integer)
+    *
+    * @return integer Combining class if found, else 0
+    * @access private
     */
     function _get_combining_class($char)
     {
@@ -2694,9 +2712,11 @@ class Net_IDNA_php4
 
     /**
     * Apllies the cannonical ordering of a decomposed UCS4 sequence
-    * @param    array      Decomposed UCS4 sequence
-    * @return   array      Ordered USC4 sequence
-    * @access   private
+    *
+    * @param array $input Decomposed UCS4 sequence
+    *
+    * @return array Ordered USC4 sequence
+    * @access private
     */
     function _apply_cannonical_ordering($input)
     {
@@ -2727,9 +2747,11 @@ class Net_IDNA_php4
 
     /**
     * Do composition of a sequence of starter and non-starter
-    * @param    array      UCS4 Decomposed sequence
-    * @return   array      Ordered USC4 sequence
-    * @access   private
+    *
+    * @param array $input UCS4 Decomposed sequence
+    *
+    * @return array Ordered USC4 sequence
+    * @access private
     */
     function _combine($input)
     {
@@ -2771,6 +2793,7 @@ class Net_IDNA_php4
     * 6       31  1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
     * Each x represents a bit that can be used to store character data.
     * The five and six byte sequences are part of Annex D of ISO/IEC 10646-1:2000
+    *
     * @access   private
     */
     function _utf8_to_ucs4($input)
@@ -2848,6 +2871,7 @@ class Net_IDNA_php4
     /**
     * Convert UCS-4 string into UTF-8 string
     * See _utf8_to_ucs4() for details
+    *
     * @access   private
     */
     function _ucs4_to_utf8($input)
@@ -2883,6 +2907,9 @@ class Net_IDNA_php4
     /**
      * Convert UCS-4 array into UCS-4 string
      *
+     * @param array $input Text to convert
+     *
+     * @return string converted array to string
      * @access   private
      */
     function _ucs4_to_ucs4_string($input)
@@ -2900,9 +2927,12 @@ class Net_IDNA_php4
     }
 
     /**
-     * Convert UCS-4 strin into UCS-4 garray
+     * Convert UCS-4 string into UCS-4 array
      *
-     * @access   private
+     * @param string $input Text to convert
+     *
+     * @return array converted string to array
+     * @access private
      */
     function _ucs4_string_to_ucs4($input)
     {
@@ -2932,6 +2962,10 @@ class Net_IDNA_php4
     /**
     * Gives you a bit representation of given Byte (8 bits), Word (16 bits) or DWord (32 bits)
     * Output width is automagically determined
+    *
+    * @param int $octet Value to convert to bitmask
+    *
+    * @return string bitmask
     * @access   private
     */
     function show_bitmask($octet)
@@ -2948,10 +2982,12 @@ class Net_IDNA_php4
 
     /**
     * echo hex represnatation of UCS4 sequence to STDOUT
-    * @param    array      UCS4 sequence
-    * @param    boolean    include bitmask in output
-    * @return   void
-    * @access   private
+    *
+    * @param array   $input UCS4 sequence
+    * @param boolean $include_bit include bitmask in output
+    *
+    * @return void
+    * @access private
     */
     function _show_hex($input, $include_bit = false)
     {
@@ -2966,16 +3002,17 @@ class Net_IDNA_php4
 }
 
 /**
-* Adapter class for aligning the API of Net_IDNA_php4 with that of
-* Net_IDNA
-* @author  Matthias Sommerfeld <mso@phlylabs.de>
+* Adapter class for aligning the API of Net_IDNA_php4 with that of Net_IDNA
+*
+* @author Matthias Sommerfeld <mso@phlylabs.de>
 */
 class Net_IDNA extends Net_IDNA_php4
 {
     /**
     * Constructor
     *
-    * @param  array  $options
+    * @param array $options
+    *
     * @access public
     * @see    setParams()
     */
@@ -2997,10 +3034,11 @@ class Net_IDNA extends Net_IDNA_php4
      *             on failures; false: loose mode, ideal for "wildlife" applications
      *             by silently ignoring errors and returning the original input instead]
      *
-     * @param    mixed     $option      Parameter to set (string: single parameter; array of Parameter => Value pairs)
-     * @param    string    $value       Value to use (if parameter 1 is a string)
-     * @return   boolean                true on success, false otherwise
-     * @access   public
+     * @param mixed  $option Parameter to set (string: single parameter; array of Parameter => Value pairs)
+     * @param string $param  Value to use (if parameter 1 is a string)
+     *
+     * @return boolean true on success, false otherwise
+     * @access public
      */
     function setParams($option, $param = false)
     {
