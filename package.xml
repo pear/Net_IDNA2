@@ -29,14 +29,13 @@ Warning: This package is now split between Net_IDNA (php4) and Net_IDNA2 (php5)
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2.php" role="php" />
-   <file baseinstalldir="/" md5sum="4b894d62b6436cdaf468255c33eb60da" name="test/test_php4.php" role="test" />
    <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="test/test_php5.php" role="test" />
   </dir>
  </contents>
  <dependencies>
   <required>
    <php>
-    <min>5.0.0</min>
+    <min>5.2.1</min>
    </php>
    <pearinstaller>
     <min>1.9.0</min>
