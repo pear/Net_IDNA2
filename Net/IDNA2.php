@@ -2339,20 +2339,19 @@ class Net_IDNA2
                 // Neither email addresses nor URLs allowed in strict mode
                 if ($this->_strict_mode) {
                    throw new Exception('Neither email addresses nor URLs are allowed in strict mode.');
-                } else {
-                    // Skip first char
-                    if ($k) {
-                        $encoded = '';
-                        $encoded = $this->_encode(array_slice($decoded, $last_begin, (($k)-$last_begin)));
-                        if ($encoded) {
-                            $output .= $encoded;
-                        } else {
-                            $output .= $this->_ucs4_to_utf8(array_slice($decoded, $last_begin, (($k)-$last_begin)));
-                        }
-                        $output .= chr($decoded[$k]);
-                    }
-                    $last_begin = $k + 1;
                 }
+                // Skip first char
+                if ($k) {
+                    $encoded = '';
+                    $encoded = $this->_encode(array_slice($decoded, $last_begin, (($k)-$last_begin)));
+                    if ($encoded) {
+                        $output .= $encoded;
+                    } else {
+                        $output .= $this->_ucs4_to_utf8(array_slice($decoded, $last_begin, (($k)-$last_begin)));
+                    }
+                    $output .= chr($decoded[$k]);
+                }
+                $last_begin = $k + 1;
             }
         }
         // Catch the rest of the string
@@ -2366,13 +2365,13 @@ class Net_IDNA2
                 $output .= $this->_ucs4_to_utf8(array_slice($decoded, $last_begin, (($inp_len)-$last_begin)));
             }
             return $output;
-        } else {
-            if ($output = $this->_encode($decoded)) {
-                return $output;
-            } else {
-                return $this->_ucs4_to_utf8($decoded);
-            }
         }
+
+        if ($output = $this->_encode($decoded)) {
+            return $output;
+        }
+
+        return $this->_ucs4_to_utf8($decoded);
     }
 
     /**
@@ -2395,7 +2394,6 @@ class Net_IDNA2
                 break;
             default:
                 throw new Exception('Unknown encoding '.$one_time_encoding);
-                return false;
             }
         }
         // Make sure to drop any newline characters around
@@ -2420,6 +2418,7 @@ class Net_IDNA2
             if ($this->_strict_mode) {
                 throw new Exception('Only simple domain name parts can be handled in strict mode');
             }
+
             $parsed = parse_url($input);
             if (isset($parsed['host'])) {
                 $arr = explode('.', $parsed['host']);
@@ -2479,6 +2478,7 @@ class Net_IDNA2
         if ($check_pref == $check_deco) {
             throw new Exception('This is already a punycode string');
         }
+
         // We will not try to encode strings consisting of basic code points only
         $encodable = false;
         foreach ($decoded as $k => $v) {
@@ -2490,18 +2490,13 @@ class Net_IDNA2
         if (!$encodable) {
             if ($this->_strict_mode) {
                 throw new Exception('The given string does not contain encodable chars');
-            } else {
-                return false;
             }
+
+            return false;
         }
 
         // Do NAMEPREP
-        try {
-            $decoded = $this->_nameprep($decoded);
-        } catch (Exception $e) {
-            // hmm, serious - rethrow
-            throw $e;
-        }
+        $decoded = $this->_nameprep($decoded);
 
         $deco_len = count($decoded);
 
@@ -2666,12 +2661,7 @@ class Net_IDNA2
             $decoded[$idx++] = $char;
         }
 
-        try {
-            return $this->_ucs4_to_utf8($decoded);
-        } catch (Exception $e) {
-            // rethrow
-            throw $e;
-        }
+        return $this->_ucs4_to_utf8($decoded);
     }
 
     /**
@@ -3038,7 +3028,6 @@ class Net_IDNA2
                 ++$out_len;
                 if ('add' == $mode) {
                     throw new Exception('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
-                    return false;
                 }
                 continue;
             }
@@ -3063,7 +3052,6 @@ class Net_IDNA2
                     $v = ($v - 252) << 30;
                 } else {
                     throw new Exception('This might be UTF-8, but I don\'t understand it at byte '.$k);
-                    return false;
                 }
                 if ('add' == $mode) {
                     $output[$out_len] = (int) $v;
@@ -3076,7 +3064,6 @@ class Net_IDNA2
                     $test = 'none';
                     if (($v < 0xA0 && $start_byte == 0xE0) || ($v < 0x90 && $start_byte == 0xF0) || ($v > 0x8F && $start_byte == 0xF4)) {
                         throw new Exception('Bogus UTF-8 character detected (out of legal range) at byte '.$k);
-                        return false;
                     }
                 }
                 if ($v >> 6 == 2) { // Bit mask must be 10xxxxxx
@@ -3085,7 +3072,6 @@ class Net_IDNA2
                     --$next_byte;
                 } else {
                     throw new Exception('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
-                    return false;
                 }
                 if ($next_byte < 0) {
                     $mode = 'next';
@@ -3142,7 +3128,7 @@ class Net_IDNA2
                     . chr(128 + (($v >>  6) & 63))
                     . chr(128 + ($v & 63));
             } else {
-                throw new Exception('Conversion from UCS-4 to UTF-8 failed: malformed input at byte ' . $k);
+                throw new Exception('Conversion from UCS-4 to UTF-8 failed: malformed input');
             }
         }
 
@@ -3180,11 +3166,12 @@ class Net_IDNA2
         // Input length must be dividable by 4
         if ($inp_len % 4) {
             throw new Exception('Input UCS4 string is broken');
-            return false;
         }
 
         // Empty input - return empty output
-        if (!$inp_len) return $output;
+        if (!$inp_len) {
+            return $output;
+        }
 
         for ($i = 0, $out_len = -1; $i < $inp_len; ++$i) {
             // Increment output position every 4 input bytes
