@@ -23,7 +23,8 @@
 //
 
 // }}}
-
+require_once 'Net/IDNA2/Exception.php';
+require_once 'Net/IDNA2/Exception/Nameprep.php';
 
 /**
  * Encode/decode Internationalized Domain Names.
@@ -54,7 +55,6 @@
  * @package Net
  * @version $Id$
  */
-
 class Net_IDNA2
 {
     // {{{ npdata
@@ -2265,7 +2265,7 @@ class Net_IDNA2
                     break;
 
                 default:
-                    throw new Exception('Set Parameter: Unknown parameter '.$v.' for option '.$k);
+                    throw new InvalidArgumentException('Set Parameter: Unknown parameter '.$v.' for option '.$k);
                 }
 
                 break;
@@ -2309,7 +2309,7 @@ class Net_IDNA2
         case 'ucs4_array': // No break; before this line. Catch case, but do nothing
            break;
         default:
-            throw new Exception('Unsupported input format');
+            throw new InvalidArgumentException('Unsupported input format');
         }
 
         // No input, no output, what else did you expect?
@@ -2338,7 +2338,7 @@ class Net_IDNA2
             case 0x40:
                 // Neither email addresses nor URLs allowed in strict mode
                 if ($this->_strict_mode) {
-                   throw new Exception('Neither email addresses nor URLs are allowed in strict mode.');
+                   throw new InvalidArgumentException('Neither email addresses nor URLs are allowed in strict mode.');
                 }
                 // Skip first char
                 if ($k) {
@@ -2393,7 +2393,7 @@ class Net_IDNA2
             case 'ucs4_array':
                 break;
             default:
-                throw new Exception('Unknown encoding '.$one_time_encoding);
+                throw new InvalidArgumentException('Unknown encoding '.$one_time_encoding);
             }
         }
         // Make sure to drop any newline characters around
@@ -2404,7 +2404,7 @@ class Net_IDNA2
         if (strpos($input, '@')) { // Maybe it is an email address
             // No no in strict mode
             if ($this->_strict_mode) {
-                throw new Exception('Only simple domain name parts can be handled in strict mode');
+                throw new InvalidArgumentException('Only simple domain name parts can be handled in strict mode');
             }
             list($email_pref, $input) = explode('@', $input, 2);
             $arr = explode('.', $input);
@@ -2416,7 +2416,7 @@ class Net_IDNA2
         } elseif (preg_match('![:\./]!', $input)) { // Or a complete domain name (with or without paths / parameters)
             // No no in strict mode
             if ($this->_strict_mode) {
-                throw new Exception('Only simple domain name parts can be handled in strict mode');
+                throw new InvalidArgumentException('Only simple domain name parts can be handled in strict mode');
             }
 
             $parsed = parse_url($input);
@@ -2455,7 +2455,7 @@ class Net_IDNA2
             return $this->_utf8_to_ucs4($return);
             break;
         default:
-            throw new Exception('Unsupported output format');
+            throw new InvalidArgumentException('Unsupported output format');
         }
     }
 
@@ -2476,7 +2476,7 @@ class Net_IDNA2
         $check_deco = array_slice($decoded, 0, $extract);
 
         if ($check_pref == $check_deco) {
-            throw new Exception('This is already a punycode string');
+            throw new InvalidArgumentException('This is already a punycode string');
         }
 
         // We will not try to encode strings consisting of basic code points only
@@ -2489,7 +2489,7 @@ class Net_IDNA2
         }
         if (!$encodable) {
             if ($this->_strict_mode) {
-                throw new Exception('The given string does not contain encodable chars');
+                throw new InvalidArgumentException('The given string does not contain encodable chars');
             }
 
             return false;
@@ -2726,12 +2726,12 @@ class Net_IDNA2
 
             // Try to find prohibited input
             if (in_array($v, self::$_np_prohibit) || in_array($v, self::$_general_prohibited)) {
-                throw new Exception('NAMEPREP: Prohibited input U+' . sprintf('%08X', $v));
+                throw new Net_IDNA2_Exception_Nameprep('Prohibited input U+' . sprintf('%08X', $v));
             }
 
             foreach (self::$_np_prohibit_ranges as $range) {
                 if ($range[0] <= $v && $v <= $range[1]) {
-                    throw new Exception('NAMEPREP: Prohibited input U+' . sprintf('%08X', $v));
+                    throw new Net_IDNA2_Exception_Nameprep('Prohibited input U+' . sprintf('%08X', $v));
                 }
             }
 
@@ -3027,7 +3027,7 @@ class Net_IDNA2
                 $output[$out_len] = $v;
                 ++$out_len;
                 if ('add' == $mode) {
-                    throw new Exception('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
+                    throw new UnexpectedValueException('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
                 }
                 continue;
             }
@@ -3051,7 +3051,7 @@ class Net_IDNA2
                     $next_byte = 4;
                     $v = ($v - 252) << 30;
                 } else {
-                    throw new Exception('This might be UTF-8, but I don\'t understand it at byte '.$k);
+                    throw new UnexpectedValueException('This might be UTF-8, but I don\'t understand it at byte '.$k);
                 }
                 if ('add' == $mode) {
                     $output[$out_len] = (int) $v;
@@ -3063,7 +3063,7 @@ class Net_IDNA2
                 if (!$this->_allow_overlong && $test == 'range') {
                     $test = 'none';
                     if (($v < 0xA0 && $start_byte == 0xE0) || ($v < 0x90 && $start_byte == 0xF0) || ($v > 0x8F && $start_byte == 0xF4)) {
-                        throw new Exception('Bogus UTF-8 character detected (out of legal range) at byte '.$k);
+                        throw new OutOfRangeException('Bogus UTF-8 character detected (out of legal range) at byte '.$k);
                     }
                 }
                 if ($v >> 6 == 2) { // Bit mask must be 10xxxxxx
@@ -3071,7 +3071,7 @@ class Net_IDNA2
                     $output[($out_len - 1)] += $v;
                     --$next_byte;
                 } else {
-                    throw new Exception('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
+                    throw new UnexpectedValueException('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
                 }
                 if ($next_byte < 0) {
                     $mode = 'next';
@@ -3128,7 +3128,7 @@ class Net_IDNA2
                     . chr(128 + (($v >>  6) & 63))
                     . chr(128 + ($v & 63));
             } else {
-                throw new Exception('Conversion from UCS-4 to UTF-8 failed: malformed input');
+                throw new UnexpectedValueException('Conversion from UCS-4 to UTF-8 failed: malformed input');
             }
         }
 
@@ -3155,7 +3155,7 @@ class Net_IDNA2
     /**
      * Convert UCS-4 strin into UCS-4 garray
      *
-     * @throws   Exception
+     * @throws   InvalidArgumentException
      * @access   private
      */
     private function _ucs4_string_to_ucs4($input)
@@ -3165,7 +3165,7 @@ class Net_IDNA2
         $inp_len = self::_byteLength($input);
         // Input length must be dividable by 4
         if ($inp_len % 4) {
-            throw new Exception('Input UCS4 string is broken');
+            throw new InvalidArgumentException('Input UCS4 string is broken');
         }
 
         // Empty input - return empty output

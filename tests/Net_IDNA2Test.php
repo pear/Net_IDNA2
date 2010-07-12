@@ -101,11 +101,6 @@ class Net_IDNA2Test extends PHPUnit_Framework_TestCase {
         $output = "\x20";
         $data[$name] = array($input, $output);
 
-        $name = "Non-ASCII multibyte space character U+1680";
-        $input = "\xE1\x9A\x80";
-        $output = "";        // STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
         $name = "Non-ASCII multibyte space character U+2000";
         $input = "\xE2\x80\x80";
         $output = "\x20";
@@ -126,64 +121,9 @@ class Net_IDNA2Test extends PHPUnit_Framework_TestCase {
         $output = "\x10\x7F";
         $data[$name] = array($input, $output);
 
-        $name = "Non-ASCII 8bit control character U+0085";
-        $input = "\xC2\x85";
-        $output = "";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Non-ASCII multibyte control character U+180E";
-        $input = "\xE1\xA0\x8E";
-        $output = "";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
         $name = "Zero Width No-Break Space U+FEFF";
         $input = "\xEF\xBB\xBF";
         $output = "";
-        $data[$name] = array($input, $output);
-
-        $name ="Non-ASCII control character U+1D175";
-        $input = "\xF0\x9D\x85\xB5";
-        $output = "";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Plane 0 private use character U+F123";
-        $input = "\xEF\x84\xA3";
-        $output = "";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Plane 15 private use character U+F1234";
-        $input = "\xF3\xB1\x88\xB4";
-        $output = "";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Plane 16 private use character U+10F234";
-        $input = "\xF4\x8F\x88\xB4";
-        $output = "";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Non-character code point U+8FFFE";
-        $input = "\xF2\x8F\xBF\xBE";
-        $output = ""; // STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Non-character code point U+10FFFF";
-        $input = "\xF4\x8F\xBF\xBF";
-        $output = ""; // STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Surrogate code U+DF42";
-        $input = "\xED\xBD\x82";
-        $output = ""; // STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Non-plain text character U+FFFD";
-        $input = "\xEF\xBF\xBD";
-        $output = ""; // STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Ideographic description character U+2FF5";
-        $input = "\xE2\xBF\xB5";
-        $output = ""; // STRINGPREP_CONTAINS_PROHIBITED
         $data[$name] = array($input, $output);
 
         $name = "Display property character U+0341";
@@ -191,54 +131,14 @@ class Net_IDNA2Test extends PHPUnit_Framework_TestCase {
         $output = "\xCC\x81";
         $data[$name] = array($input, $output);
 
-        $name = "Left-to-right mark U+200E";
-        $input = "\xE2\x80\x8E";
-        $output = "\xCC\x81";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Deprecated U+202A";
-        $input = "\xE2\x80\xAA";
-        $output = "\xCC\x81";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Language tagging character U+E0001";
-        $input = "\xF3\xA0\x80\x81";
-        $output = "\xCC\x81";// STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Language tagging character U+E0042";
-        $input = "\xF3\xA0\x81\x82";
-        $output = ""; // STRINGPREP_CONTAINS_PROHIBITED
-        $data[$name] = array($input, $output);
-
-        $name = "Bidi: RandALCat character U+05BE and LCat characters";
-        $input = "foo\xD6\xBEbar";
-        $output = ""; //STRINGPREP_BIDI_BOTH_L_AND_RAL
-        $data[$name] = array($input, $output);
-
-        $name = "Bidi: RandALCat character U+FD50 and LCat characters";
-        $input = "foo\xEF\xB5\x90bar";
-        $output = "";//STRINGPREP_BIDI_BOTH_L_AND_RAL
-        $data[$name] = array($input, $output);
-
         $name = "Bidi: RandALCat character U+FB38 and LCat characters";
         $input = "foo\xEF\xB9\xB6bar";
         $output = "foo \xd9\x8ebar";
         $data[$name] = array($input, $output);
 
-        $name = "Bidi: RandALCat without trailing RandALCat U+0627 U+0031";
-        $input = "\xD8\xA7\x31";
-        $output = ""; //STRINGPREP_BIDI_LEADTRAIL_NOT_RAL
-        $data[$name] = array($input, $output);
-
         $name = "Bidi: RandALCat character U+0627 U+0031 U+0628";
         $input = "\xD8\xA7\x31\xD8\xA8";
         $output = "\xD8\xA7\x31\xD8\xA8";
-        $data[$name] = array($input, $output);
-
-        $name = "Unassigned code point U+E0002";
-        $input = "\xF3\xA0\x80\x82";
-        $output = ""; //STRINGPREP_CONTAINS_UNASSIGNED
         $data[$name] = array($input, $output);
 
         $name = "Larger test (shrinking)";
@@ -258,9 +158,135 @@ class Net_IDNA2Test extends PHPUnit_Framework_TestCase {
     }
 
     /**
+     * Encoding test data which should fail
+     */
+    public function notEncode() {
+        $data = array();
+
+        $name = "Non-ASCII multibyte space character U+1680";
+        $input = "\xE1\x9A\x80";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Non-ASCII 8bit control character U+0085";
+        $input = "\xC2\x85";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Non-ASCII multibyte control character U+180E";
+        $input = "\xE1\xA0\x8E";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name ="Non-ASCII control character U+1D175";
+        $input = "\xF0\x9D\x85\xB5";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Plane 0 private use character U+F123";
+        $input = "\xEF\x84\xA3";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Plane 15 private use character U+F1234";
+        $input = "\xF3\xB1\x88\xB4";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Plane 16 private use character U+10F234";
+        $input = "\xF4\x8F\x88\xB4";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Non-character code point U+8FFFE";
+        $input = "\xF2\x8F\xBF\xBE";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Non-character code point U+10FFFF";
+        $input = "\xF4\x8F\xBF\xBF";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Surrogate code U+DF42";
+        $input = "\xED\xBD\x82";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Non-plain text character U+FFFD";
+        $input = "\xEF\xBF\xBD";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Ideographic description character U+2FF5";
+        $input = "\xE2\xBF\xB5";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Left-to-right mark U+200E";
+        $input = "\xE2\x80\x8E";
+        // Should return "\xCC\x81"
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Deprecated U+202A";
+        $input = "\xE2\x80\xAA";
+        // Should return "\xCC\x81"
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Language tagging character U+E0001";
+        $input = "\xF3\xA0\x80\x81";
+        // Should return "\xCC\x81"
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Language tagging character U+E0042";
+        $input = "\xF3\xA0\x81\x82";
+        $exception_text = "Prohibited";
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Bidi: RandALCat character U+05BE and LCat characters";
+        $input = "foo\xD6\xBEbar";
+        $exception_text = "Bidi"; //STRINGPREP_BIDI_BOTH_L_AND_RAL
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Bidi: RandALCat character U+FD50 and LCat characters";
+        $input = "foo\xEF\xB5\x90bar";
+        $exception_text = "Bidi";//STRINGPREP_BIDI_BOTH_L_AND_RAL
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Bidi: RandALCat without trailing RandALCat U+0627 U+0031";
+        $input = "\xD8\xA7\x31";
+        $exception_text = "Bidi"; //STRINGPREP_BIDI_LEADTRAIL_NOT_RAL
+        $data[$name] = array($input, $exception_text);
+
+        $name = "Unassigned code point U+E0002";
+        $input = "\xF3\xA0\x80\x82";
+        $exception_text = "Unassigned"; //STRINGPREP_CONTAINS_UNASSIGNED
+        $data[$name] = array($input, $exception_text);
+
+        return $data;
+    }
+
+
+    /**
      * @dataProvider encode()
      */
-    public function testShouldEncodeProperly($in, $out) {
+    public function testShouldEncode($in, $out) {
         $this->assertSame($out, $this->idn->encode($in));
+    }
+
+    /**
+     * @dataProvider notEncode()
+     */
+    public function testShouldNotEncodeProhibitedData($in, $exception_text) {
+        try {
+            $this->idn->encode($in);
+
+            $this->fail("Expected an exception prior to this point.");
+        } catch (Net_IDNA2_Exception $nie) {
+            $this->assertContains($exception_text, $nie->getMessage());
+        }
     }
 }
