@@ -9,11 +9,11 @@ class Net_IDNA2Test extends PHPUnit2_Framework_TestCase {
     }
 
     public function testShouldDecodePortNumbersFragmentsAndUrisCorrectly() {
-        $result = $this->idn->decode('http://www.xn--ml-6kctd8d6a.org:8080/test.php?arg=1#fragment');
-
 // not sure where this testcase came from, but it's wrong
+//        $result = $this->idn->decode('http://www.xn--ml-6kctd8d6a.org:8080/test.php?arg1=1&arg2=2#fragment');
 //        $this->assertSame("http://www.╨╡╤à╨░m╤Çl╨╡.org:8080/test.php?arg=1#fragment", $result);
-        $this->assertSame("http://www.example.org:8080/test.php?arg=1#fragment", $result);
+        $result = $this->idn->decode('http://xn--tst-qla.example.com:8080/test.php?arg1=1&arg2=2#fragment');
+        $this->assertSame("http://täst.example.com:8080/test.php?arg1=1&arg2=2#fragment", $result);
     }
 
     public function testEncodingForGermanEszettUsingIDNA2003() {

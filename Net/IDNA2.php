@@ -2452,7 +2452,7 @@ class Net_IDNA2
                 if (isset($parsed['scheme'])) {
                     $parsed['scheme'] .= (strtolower($parsed['scheme']) == 'mailto') ? ':' : '://';
                 }
-                $return = join('', $parsed);
+                $return = $this->_unparse_url($parsed);
             } else { // parse_url seems to have failed, try without it
                 $arr = explode('.', $input);
                 foreach ($arr as $k => $v) {
@@ -2483,6 +2483,40 @@ class Net_IDNA2
 
 
     // {{{ private
+    /**
+     * Opposite function to parse_url()
+     *
+     * Inspired by code from comments of php.net-documentation for parse_url()
+     *
+     * @array    string   parts as returned by parse_url()
+     * @return   string
+     * @access   private
+     */
+    private function _unparse_url($parts_arr) {
+        if (!empty($parts_arr['scheme'])) {
+            $ret_url = $parts_arr['scheme'];
+        }
+        if(!empty($parts_arr['user'])) {
+            $ret_url .= $parts_arr['user'];
+            if (!empty($parts_arr['pass'])) {
+                $ret_url .= ':' . $parts_arr['pass'];
+            }
+            $ret_url .= '@';
+        }
+        $ret_url .= $parts_arr['host'];
+        if (!empty($parts_arr['port'])) {
+            $ret_url .= ':' . $parts_arr['port'];
+        }
+        $ret_url .= $parts_arr['path'];
+        if (!empty($parts_arr['query'])) {
+            $ret_url .= '?' . $parts_arr['query'];
+        }
+        if (!empty($parts_arr['fragment'])) {
+            $ret_url .= '#' . $parts_arr['fragment'];
+        }
+        return $ret_url;
+    }
+
     /**
      * The actual encoding algorithm.
      *
