@@ -2194,6 +2194,20 @@ class Net_IDNA2
     private $_strict_mode = false;
 
     /**
+     * IDNA-version to use
+     *
+     * Values are "2003" and "2008".
+     * Defaults to "2003", since that was the original version and for
+     * compatibility with previous versions of this library.
+     * If you need to encode "new" characters like the German "Eszett",
+     * please switch to 2008 first before encoding.
+     *
+     * @var bool
+     * @access private
+     */
+    private $_version = '2003';
+
+    /**
      * Cached value indicating whether or not mbstring function overloading is
      * on for strlen
      *
@@ -2276,6 +2290,14 @@ class Net_IDNA2
 
             case 'strict':
                 $this->_strict_mode = ($v) ? true : false;
+                break;
+
+            case 'version':
+                if (in_array($v, array('2003', '2008'))) {
+                    $this->_version = $v;
+                } else {
+                    throw new InvalidArgumentException('Set Parameter: Invalid parameter '.$v.' for option '.$k);
+                }
                 break;
 
             default:
@@ -2740,7 +2762,9 @@ class Net_IDNA2
                 foreach ($this->_hangulDecompose($v) as $out) {
                     $output[] = $out;
                 }
-            } else if (isset(self::$_np_replacemaps[$v])) { // There's a decomposition mapping for that code point
+            } else if (($this->_version == '2003') && isset(self::$_np_replacemaps[$v])) {
+                // There's a decomposition mapping for that code point
+                // Decompositions only in version 2003 (original) of IDNA
                 foreach ($this->_applyCannonicalOrdering(self::$_np_replacemaps[$v]) as $out) {
                     $output[] = $out;
                 }

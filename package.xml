@@ -5,15 +5,21 @@
  <summary>Punycode encoding and decoding.</summary>
  <description>This package helps you to encode and decode punycode strings easily.</description>
  <lead>
+  <name>Stefan Neufeind</name>
+  <user>neufeind</user>
+  <email>pear.neufeind@speedpartner.de</email>
+  <active>yes</active>
+ </lead>
+ <lead>
   <name>Daniel O&apos;Connor</name>
   <user>doconnor</user>
   <email>daniel.oconnor@gmail.com</email>
-  <active>yes</active>
+  <active>no</active>
  </lead>
- <date>2010-06-03</date>
- <time>01:15:30</time>
+ <date>2010-11-08</date>
+ <time>15:14:00</time>
  <version>
-  <release>0.1.0</release>
+  <release>0.1.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -22,14 +28,21 @@
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-QA Release
-Bug #17430 	Multiple Net_IDNA class declarations
-Warning: This package is now split between Net_IDNA (php4) and Net_IDNA2 (php5)
+* Added initial support for IDNA2008. This is needed for characters like the German
+  "Eszett" which would otherwise be turned into "ss" during nameprep.
+  Use $n->setParams('version', '2008') to use the "new" IDNA-encoding. Default is still
+  IDNA2003 for backwards-compatibility.
+  Further aspects of IDNA2008-encoding (for example some checks) should be added later
+  according to RFCs.
+* Added testcases
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2.php" role="php" />
-   <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="test/test_php5.php" role="test" />
+   <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2/Exception.php" role="php" />
+   <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="docs/examples/example_web.php" role="doc" />
+   <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="tests/AllTests.php" role="test" />
+   <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="tests/Net_IDNA2Test.php" role="test" />
   </dir>
  </contents>
  <dependencies>
