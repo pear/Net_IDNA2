@@ -15,15 +15,23 @@ class Net_IDNA2Test extends PHPUnit2_Framework_TestCase
     }
 
     /**
-     * Test if a complete URL consisting also of port-number etc. will be decoded just fine
+     * Test if a complete URL consisting also of port-number etc. will be decoded just fine, test 1
      *
      * @return void
      */
-    public function testShouldDecodePortNumbersFragmentsAndUrisCorrectly()
+    public function testShouldDecodePortNumbersFragmentsAndUrisCorrectly1()
     {
-        // not sure where this testcase came from, but it's wrong
-        // $result = $this->idn->decode('http://www.xn--ml-6kctd8d6a.org:8080/test.php?arg1=1&arg2=2#fragment');
-        // $this->assertSame("http://www.╨╡╤à╨░m╤Çl╨╡.org:8080/test.php?arg=1#fragment", $result);
+        $result = $this->idn->decode('http://www.xn--ml-6kctd8d6a.org:8080/test.php?arg1=1&arg2=2#fragment');
+        $this->assertSame("http://www.\xD0\xB5\xD1\x85\xD0\xB0m\xD1\x80l\xD0\xB5.org:8080/test.php?arg1=1&arg2=2#fragment", $result);
+    }
+
+    /**
+     * Test if a complete URL consisting also of port-number etc. will be decoded just fine, test 2
+     *
+     * @return void
+     */
+    public function testShouldDecodePortNumbersFragmentsAndUrisCorrectly2()
+    {
         $result = $this->idn->decode('http://xn--tst-qla.example.com:8080/test.php?arg1=1&arg2=2#fragment');
         $this->assertSame("http://täst.example.com:8080/test.php?arg1=1&arg2=2#fragment", $result);
     }
