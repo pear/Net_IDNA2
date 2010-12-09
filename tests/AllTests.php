@@ -7,6 +7,7 @@ if (!defined('PHPUnit2_MAIN_METHOD')) {
 require_once 'PHPUnit2/TextUI/TestRunner.php';
 
 require_once 'Net_IDNA2Test.php';
+require_once 'draft-josefsson-idn-test-vectors.php';
 
 class Net_IDNA2_AllTests
 {
@@ -20,6 +21,7 @@ class Net_IDNA2_AllTests
         $suite = new PHPUnit2_Framework_TestSuite('PEAR - Net_IDNA2');
 
         $suite->addTestSuite('Net_IDNA2Test');
+        $suite->addTestSuite('draft-josefsson-idn-test-vectors');
 
         return $suite;
     }
