@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Net_IDNA2</name>
  <channel>pear.php.net</channel>
  <summary>Punycode encoding and decoding.</summary>
@@ -29,8 +29,8 @@
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
 * Added initial support for IDNA2008. This is needed for characters like the German
-  "Eszett" which would otherwise be turned into "ss" during nameprep.
-  Use $n->setParams('version', '2008') to use the "new" IDNA-encoding. Default is still
+  &quot;Eszett&quot; which would otherwise be turned into &quot;ss&quot; during nameprep.
+  Use $n-&gt;setParams(&apos;version&apos;, &apos;2008&apos;) to use the &quot;new&quot; IDNA-encoding. Default is still
   IDNA2003 for backwards-compatibility.
   Further aspects of IDNA2008-encoding (for example some checks) should be added later
   according to RFCs.
