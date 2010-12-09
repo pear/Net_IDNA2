@@ -16,8 +16,8 @@
   <email>daniel.oconnor@gmail.com</email>
   <active>no</active>
  </lead>
- <date>2010-11-08</date>
- <time>15:14:00</time>
+ <date>2010-12-09</date>
+ <time>17:32:00</time>
  <version>
   <release>0.1.1</release>
   <api>0.1.0</api>
@@ -34,7 +34,13 @@
   IDNA2003 for backwards-compatibility.
   Further aspects of IDNA2008-encoding (for example some checks) should be added later
   according to RFCs.
-* Added testcases
+* #16466: Unit tests (testcaseses from draft-josefsson-idn-test-vectors; thanks to Daniel)
+* Unit tests (coverage, refactoring/cleanup, more tests)
+* #17542: URIs get mangled when decoding (UTF8-fix)
+* Codingstyle fixes
+* fixed handling of URLs with more than a domain-name (fixed opposite of parse_url())
+* Added specialized and spl exceptions
+* #17533: Releases and roles do not seem to work.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
