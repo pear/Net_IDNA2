@@ -1,8 +1,8 @@
 <?php
 require_once 'Net/IDNA2.php';
-require_once 'PHPUnit2/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
-class Net_IDNA2Test extends PHPUnit2_Framework_TestCase
+class Net_IDNA2Test extends PHPUnit_Framework_TestCase
 {
     /**
      * Initialise tests

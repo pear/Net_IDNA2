@@ -1,32 +1,37 @@
 <?php
 
-if (!defined('PHPUnit2_MAIN_METHOD')) {
-    define('PHPUnit2_MAIN_METHOD', 'Net_IDNA2_AllTests::main');
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Net_IDNA2_AllTests::main');
 }
 
-require_once 'PHPUnit2/TextUI/TestRunner.php';
-
-require_once 'Net_IDNA2Test.php';
-require_once 'draft-josefsson-idn-test-vectors.php';
+if ($fp = @fopen('PHPUnit/Autoload.php', 'r', true)) {
+    require_once 'PHPUnit/Autoload.php';
+} elseif ($fp = @fopen('PHPUnit/Framework.php', 'r', true)) {
+    require_once 'PHPUnit/Framework.php';
+    require_once 'PHPUnit/TextUI/TestRunner.php';
+} else {
+    die("skip could not find PHPUnit\n");
+}
+fclose($fp);
 
 class Net_IDNA2_AllTests
 {
     public static function main()
     {
-        PHPUnit2_TextUI_TestRunner::run(self::suite());
+        PHPUnit_TextUI_TestRunner::run(self::suite());
     }
 
     public static function suite()
     {
-        $suite = new PHPUnit2_Framework_TestSuite('PEAR - Net_IDNA2');
+        $suite = new PHPUnit_Framework_TestSuite('PEAR - Net_IDNA2');
 
-        $suite->addTestSuite('Net_IDNA2Test');
-        $suite->addTestSuite('draft-josefsson-idn-test-vectors');
+        $suite->addTestFile(dirname(__FILE__) . '/Net_IDNA2Test.php');
+        $suite->addTestFile(dirname(__FILE__) . '/draft-josefsson-idn-test-vectors.php');
 
         return $suite;
     }
 }
 
-if (PHPUnit2_MAIN_METHOD == 'Net_IDNA2_AllTests::main') {
+if (PHPUnit_MAIN_METHOD == 'Net_IDNA2_AllTests::main') {
     Net_IDNA2_AllTests::main();
 }

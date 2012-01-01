@@ -1,12 +1,12 @@
 <?php
 require_once 'Net/IDNA2.php';
-require_once 'PHPUnit2/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
 // Test cases from http://www.gnu.org/software/libidn/draft-josefsson-idn-test-vectors.html
 
 define('IDNA_ACE_PREFIX', 'xn--');
 
-class IDNATest extends PHPUnit2_Framework_TestCase {
+class IDNATest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
         $this->idn = new Net_IDNA2();
