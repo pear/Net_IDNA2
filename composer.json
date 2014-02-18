@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Net_IDNA2": "./"
+            "Net": "./"
         }
     },
     "description": "More info available on: http://pear.php.net/package/Net_IDNA2",
