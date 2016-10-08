@@ -29,7 +29,7 @@ require_once 'Net/IDNA2/Exception/Nameprep.php';
 /**
  * Encode/decode Internationalized Domain Names.
  *
- * The class allows to convert internationalized domain names
+ * The class allows one to convert internationalized domain names
  * (see RFC 3490 for details) as they can be used with various registries worldwide
  * to be translated between their original (localized) form and their encoded form
  * as it will be used in the DNS (Domain Name System).
@@ -2426,7 +2426,7 @@ class Net_IDNA2
         // Make sure to drop any newline characters around
         $input = trim($input);
 
-        // Negotiate input and try to determine, wether it is a plain string,
+        // Negotiate input and try to determine, whether it is a plain string,
         // an email address or something like a complete URL
         if (strpos($input, '@')) { // Maybe it is an email address
             // No no in strict mode
@@ -2678,7 +2678,7 @@ class Net_IDNA2
             return false;
         }
 
-        // Find last occurence of the delimiter
+        // Find last occurrence of the delimiter
         $delim_pos = strrpos($encoded, '-');
 
         if ($delim_pos > self::_byteLength($this->_punycode_prefix)) {
@@ -2796,7 +2796,7 @@ class Net_IDNA2
 
         // Walking through the input array, performing the required steps on each of
         // the input chars and putting the result into the output array
-        // While mapping required chars we apply the cannonical ordering
+        // While mapping required chars we apply the canonical ordering
 
         foreach ($input as $v) {
             // Map to nothing == skip that code point
@@ -2988,7 +2988,7 @@ class Net_IDNA2
     }
 
     /**
-     * Apllies the cannonical ordering of a decomposed UCS4 sequence.
+     * Apllies the canonical ordering of a decomposed UCS4 sequence.
      *
      * @param array $input Decomposed UCS4 sequence
      *
@@ -3114,7 +3114,7 @@ class Net_IDNA2
         for ($k = 0; $k < $inp_len; ++$k) {
             $v = ord($input{$k}); // Extract byte from input string
 
-            if ($v < 128) { // We found an ASCII char - put into stirng as is
+            if ($v < 128) { // We found an ASCII char - put into string as is
                 $output[$out_len] = $v;
                 ++$out_len;
                 if ('add' == $mode) {
@@ -3377,7 +3377,7 @@ class Net_IDNA2
      * only creating a new instance if no IDNA instance with the same
      * parameters currently exists.
      *
-     * @param array $params Set of paramaters
+     * @param array $params Set of parameters
      *
      * @return object Net_IDNA2
      * @access public
