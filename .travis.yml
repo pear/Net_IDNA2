@@ -9,7 +9,7 @@ php:
 script:
   - pear list
   - pear channel-update pear.php.net
-  - pear upgrade pear/pear-1.10.1
+  - pear upgrade --force pear/pear-1.10.1
   - pear list
   - pear install --force package.xml
   - pear list
