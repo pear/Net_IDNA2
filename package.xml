@@ -16,11 +16,11 @@
   <email>daniel.oconnor@gmail.com</email>
   <active>no</active>
  </lead>
- <date>2010-12-09</date>
- <time>17:32:00</time>
+ <date>2017-03-06</date>
+ <time>14:40:00</time>
  <version>
-  <release>0.1.1</release>
-  <api>0.1.0</api>
+  <release>0.2.0</release>
+  <api>0.2.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -28,40 +28,34 @@
  </stability>
  <license uri="https://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-* Added initial support for IDNA2008. This is needed for characters like the German
-  &quot;Eszett&quot; which would otherwise be turned into &quot;ss&quot; during nameprep.
-  Use $n-&gt;setParams(&apos;version&apos;, &apos;2008&apos;) to use the &quot;new&quot; IDNA-encoding. Default is still
-  IDNA2003 for backwards-compatibility.
-  Further aspects of IDNA2008-encoding (for example some checks) should be added later
-  according to RFCs.
-* #16466: Unit tests (testcaseses from draft-josefsson-idn-test-vectors; thanks to Daniel)
-* Unit tests (coverage, refactoring/cleanup, more tests)
-* #17542: URIs get mangled when decoding (UTF8-fix)
-* Codingstyle fixes
-* fixed handling of URLs with more than a domain-name (fixed opposite of parse_url())
-* Added specialized and spl exceptions
-* #17533: Releases and roles do not seem to work.
+* Set minimum PHP version to 5.4.0
+* Set minimum PEAR version to 1.10.1
+
+* Bug #19375: Add static to the fuction getInstance
+* Bug #21123: Signing the source package
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2.php" role="php" />
-   <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2/Exception.php" role="php" />
-   <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2/Exception/Nameprep.php" role="php" />
-   <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="tests/Net_IDNA2Test.php" role="test" />
+   <file baseinstalldir="/" name="Net/IDNA2.php" role="php" />
+   <file baseinstalldir="/" name="Net/IDNA2/Exception.php" role="php" />
+   <file baseinstalldir="/" name="Net/IDNA2/Exception/Nameprep.php" role="php" />
+   <file baseinstalldir="/" name="tests/Net_IDNA2Test.php" role="test" />
+   <file baseinstalldir="/" name="tests/draft-josefsson-idn-test-vectors.php" role="test" />
   </dir>
  </contents>
  <dependencies>
   <required>
    <php>
-    <min>5.2.1</min>
+    <min>5.4.0</min>
    </php>
    <pearinstaller>
-    <min>1.9.0</min>
+    <min>1.10.1</min>
    </pearinstaller>
   </required>
  </dependencies>
  <phprelease />
  <changelog>
+
   <release>
    <version>
     <release>0.1.0</release>
@@ -79,5 +73,26 @@ Bug #17430 	Multiple Net_IDNA class declarations
 Warning: This package is now split between Net_IDNA (php4) and Net_IDNA2 (php5)
    </notes>
   </release>
+
+  <release>
+   <version>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2017-03-06</date>
+   <license uri="https://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+* Set minimum PHP version to 5.4.0
+* Set minimum PEAR version to 1.10.1
+
+* Bug #19375: Add static to the fuction getInstance
+* Bug #21123: Signing the source package
+   </notes>
+  </release>
+
  </changelog>
 </package>
