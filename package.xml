@@ -47,7 +47,6 @@
    <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2.php" role="php" />
    <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2/Exception.php" role="php" />
    <file baseinstalldir="/" md5sum="5ea959233cb234919f7326ddb7ccb47c" name="Net/IDNA2/Exception/Nameprep.php" role="php" />
-   <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="tests/AllTests.php" role="test" />
    <file baseinstalldir="/" md5sum="d4bec3bf5209b1b15d60f6bda5e96eeb" name="tests/Net_IDNA2Test.php" role="test" />
   </dir>
  </contents>
