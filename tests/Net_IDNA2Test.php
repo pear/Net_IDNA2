@@ -1,6 +1,5 @@
 <?php
 require_once 'Net/IDNA2.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
 class Net_IDNA2Test extends PHPUnit_Framework_TestCase
 {

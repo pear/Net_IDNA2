@@ -1,6 +1,5 @@
 <?php
 require_once 'Net/IDNA2.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
 // Test cases from http://www.gnu.org/software/libidn/draft-josefsson-idn-test-vectors.html
 
