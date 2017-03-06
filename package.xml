@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.1" version="2.0" xmlns="https://pear.php.net/dtd/package-2.0" xmlns:tasks="https://pear.php.net/dtd/tasks-1.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://pear.php.net/dtd/tasks-1.0 https://pear.php.net/dtd/tasks-1.0.xsd https://pear.php.net/dtd/package-2.0 https://pear.php.net/dtd/package-2.0.xsd">
  <name>Net_IDNA2</name>
  <channel>pear.php.net</channel>
  <summary>Punycode encoding and decoding.</summary>
@@ -26,7 +26,7 @@
   <release>beta</release>
   <api>beta</api>
  </stability>
- <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+ <license uri="https://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
 * Added initial support for IDNA2008. This is needed for characters like the German
   &quot;Eszett&quot; which would otherwise be turned into &quot;ss&quot; during nameprep.
@@ -72,7 +72,7 @@
     <api>beta</api>
    </stability>
    <date>2010-06-03</date>
-   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <license uri="https://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
 QA Release
 Bug #17430 	Multiple Net_IDNA class declarations

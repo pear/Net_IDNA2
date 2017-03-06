@@ -1,7 +1,7 @@
 <?php
 require_once 'Net/IDNA2.php';
 
-// Test cases from http://www.gnu.org/software/libidn/draft-josefsson-idn-test-vectors.html
+// Test cases from https://www.gnu.org/software/libidn/draft-josefsson-idn-test-vectors.html
 
 define('IDNA_ACE_PREFIX', 'xn--');
 
