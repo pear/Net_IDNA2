@@ -3365,7 +3365,7 @@ class Net_IDNA2
      * @return Net_IDNA2
      * @access public
      */
-    function getInstance($params = array())
+    public static function getInstance($params = array())
     {
         return new Net_IDNA2($params);
     }
@@ -3382,7 +3382,7 @@ class Net_IDNA2
      * @return object Net_IDNA2
      * @access public
      */
-    function singleton($params = array())
+    public static function singleton($params = array())
     {
         static $instances;
         if (!isset($instances)) {
